@@ -1,0 +1,55 @@
+{
+  "name": "mean-stack-file-upload-angularjs",
+  "version": "1.0.0",
+  "description": "Mean stack file upload management using angularjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",    
+    "url": "https://github.com/Malrajb/mean-stack-file-upload-angularjs"
+  },
+  "keywords": [
+    "Mean",    
+    "meanstack",
+    "node",
+    "nodejs",
+    "node-js",
+    "express",
+    "mongodb",
+    "mongoose",
+    "multer",
+	"Angularjs",
+	"ng-file-upload",
+	"bootstrap",
+    "file-upload",
+	"uploading-files",
+    "file-management"    
+  ],
+  "author": "Malraj B",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.4.8",
+    "angular-messages": "^1.4.8",
+    "bcryptjs": "^2.1.0",
+    "body-parser": "^1.14.2",
+    "ejs": "^2.3.3",
+    "express": "^4.13.0",
+    "express-jwt": "^3.0.1",
+    "express-session": "^1.11.3",
+    "fs": "^0.0.2",
+    "jsonwebtoken": "^5.0.2",
+    "lodash": "^4.17.15",
+    "mongodb": "^2.1.16",
+    "mongoose": "^4.3.1",
+    "mongoskin": "^2.1.0",
+    "multer": "^1.1.0",
+    "ng-file-upload": "^10.1.9",
+    "q": "^1.4.1",
+    "request": "^2.58.0",
+    "rootpath": "^0.1.2"
+  },
+  "homepage": "https://github.com/Malrajb/mean-stack-file-upload-angularjs#readme"
+}

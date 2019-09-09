@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>MEAN Stack - File upload Management using Angularjs</title>
+
+    <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" /> 
+		 <link rel="stylesheet" href="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.css">
+		 <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
+	-->
+	<link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">	
+	<link href="bower_components/bootstrap/bootstrap.min.css" rel="stylesheet">
+	<link href="bower_components/bootstrap/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="bower_components/angular-ng-table/ng-table.min.css" rel="stylesheet">	
+	
+	<link href="assets/css/font-awesome.css" rel="stylesheet">
+	<link href="assets/css/style.css" rel="stylesheet">
+	<link href="assets/css/dashboard.css" rel="stylesheet">
+	<link href="assets/css/signin.css" rel="stylesheet">
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	
+</head>
+<body>   
+   <div ng-include="'common/userHeader.html'"></div> <!-- userHeader -->	
+   	
+   <div class="main">
+		<div class="main-inner">
+			<div class="container" ui-view>
+			</div>
+		</div>
+	</div>
+   	
+   <!-- footer -->
+    <div ng-include="'common/footer.html'"></div> 
+   
+  <!-- external scripts -->
+    <!-- 
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-all.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+	<script src="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-validation/1.4.4/angular-validation.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-validation/1.4.4/angular-validation-rule.js"></script>
+	
+	-->
+    <script src="bower_components/jquery/jquery.min.js"></script> 
+	<script src="bower_components/bootstrap/bootstrap.min.js"></script>
+	<script src="bower_components/angular/angular.min.js"></script>
+	<script src="bower_components/ng-file-upload-all.min.js"></script>	
+	<script src="bower_components/angular-ui-router/angular-ui-router.min.js"></script>	
+	<script src="bower_components/angular-ng-table/ng-table.min.js"></script>
+	 
+	
+	<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script src="bower_components/angular-validation/angular-validation.js"></script>
+	<script src="bower_components/angular-validation/angular-validation-rule.js"></script>	
+			
+	<!-- application scripts -->
+    <script src="app.js"></script>
+    <script src="app-services/user.service.js"></script>
+    <script src="app-services/file.service.js"></script>
+    <script src="app-services/flash.service.js"></script>
+    <script src="home/index.controller.js"></script>
+    <script src="account/index.controller.js"></script>    
+	<script src="filelist/index.controller.js"></script>
+</body>
+</html>

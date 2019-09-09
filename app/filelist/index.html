@@ -1,0 +1,96 @@
+﻿<!--  File upload starts -->
+<div class="row">
+	<div class="span12">
+  
+		<div class="widget widget-table action-table">
+			<div class="widget-header"> <i class="icon-th-list"></i>
+				<h3>Upload File </h3>
+			</div>	
+			<!-- /widget-header -->
+	
+				
+			<div class="widget-content">				
+				
+				   <div class="row" style="padding-left:10px; margin-top:10px;">
+					<form ng-submit="submit()" method="post" >
+						<fieldset>
+							<div class="span3">
+								<div class="form-group">
+									<label for="name">File Title</label>
+									<input type="text" name="name" id="name" ng-model="upload.name" autocomplete="off" required/>
+								</div>
+							</div>
+							<div class="span3">
+								<div class="form-group">
+									<label for="file">Upload file</label>
+									<input type="file" name="file" id="file" ng-model="upload.file" ngf-select ngf-max-size="25MB" required/>
+								</div>
+							</div>
+							<div class="span5">
+								<div class="form-group">
+									<label for="firstName">&nbsp;</label>
+									<input type="submit" value="Submit"/>
+								</div>
+							</div>
+						</fieldset>
+					</form>		
+				 
+			  </div>
+			</div>
+		  
+	
+		</div>
+		<!-- /widget- action-table -->
+	</div>
+	<!-- /span12 -->
+</div>
+<!-- /row -->
+
+<!--  File upload ends -->
+
+<div class="row">
+<div class="span12">
+  
+    <div class="widget widget-table action-table">
+	<div class="widget-header"> <i class="icon-th-list"></i>
+	  <h3>My files </h3>
+	</div>
+	<!-- /widget-header -->		  
+		  
+	<div class="widget-content">
+				
+		<table ng-table="uploadList" show-filter="true" class="table table-striped table-bordered">
+			<tr ng-repeat="upload in uploads">
+				<td data-title="'Title'" sortable="'name'" filter="{ 'name': 'text' }">
+					{{upload.name}}
+				</td>
+				<td data-title="'File Name'" sortable="'upload.file.originalname'" filter="{ 'upload.file.originalname': 'text' }">
+					{{upload.file.originalname}}
+				</td>
+				<td data-title="'Mime Type '" sortable="'upload.file.mimetype'" filter="{ 'upload.file.mimetype': 'text' }">
+					{{upload.file.mimetype}}
+				</td>
+				<td data-title="'File Size'" sortable="'upload.file.size'" filter="{ 'upload.file.size': 'text' }">
+					{{upload.file.size}}
+				</td>				
+				<td data-title="'View'">							
+					<a ng-href='{{"../"+upload.file.path + "/" + upload.file.originalname}}'><button class="btn  btn-success">Download</button></a>
+					
+				</td>
+			</tr>
+		</table> 
+
+	
+	</div>
+	<!-- /widget-content --> 
+  </div>
+  <!-- /widget --> 
+
+
+  
+</div>
+<!-- /span12 --> 
+</div>
+<!-- /row --> 
+
+ 

@@ -1,0 +1,6 @@
+﻿{
+    "connectionString": "mongodb://localhost:27017/mean-stack-file-upload-angularjs",
+    "apiUrl": "http://localhost:3060/api",
+    "secret": "mean-stack-file-upload-angularjs",
+    "useNewUrlParser": true 
+}
