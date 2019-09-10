@@ -12,7 +12,7 @@
 			<div class="widget-content">				
 				
 				   <div class="row" style="padding-left:10px; margin-top:10px;">
-					<form ng-submit="submit()" method="post" >
+					<form ng-submit="uploadFile()" method="post" >
 						<fieldset>
 							<div class="span3">
 								<div class="form-group">
@@ -57,27 +57,29 @@
 	</div>
 	<!-- /widget-header -->		  
 		  
-	<div class="widget-content">
+	<div class="widget-content" id="uploadListWidget">
 				
-		<table ng-table="uploadList" show-filter="true" class="table table-striped table-bordered">
-			<tr ng-repeat="upload in uploads">
-				<td data-title="'Title'" sortable="'name'" filter="{ 'name': 'text' }">
-					{{upload.name}}
-				</td>
-				<td data-title="'File Name'" sortable="'originalname'" filter="{ 'originalname': 'text' }">
-					{{upload.originalname}}
-				</td>
-				<td data-title="'Mime Type '" sortable="'mimetype'" filter="{ 'mimetype': 'text' }">
-					{{upload.mimetype}}
-				</td>
-				<td data-title="'File Size'" sortable="'size'" filter="{ 'size': 'text' }">
-					{{upload.size}}
-				</td>				
-				<td data-title="'View'">							
-					<a ng-href='{{"../"+upload.path + "/" + upload.originalname}}'><button class="btn  btn-success">Download</button></a>
-					
-				</td>
-			</tr>
+		<table ng-table="uploadList" show-filter="true" class="table table-striped table-bordered" id="uploadListTbl">
+			<tbody ng-repeat="upload in uploads">
+				<tr rowno="{{$index}}" ng-class="{recent_uploaded_file:  ($index == 0 && file_uploaded == 1) }" >
+					<td data-title="'Title'" sortable="'name'" filter="{ 'name': 'text' }">
+						{{upload.name}}
+					</td>
+					<td data-title="'File Name'" sortable="'originalname'" filter="{ 'originalname': 'text' }">
+						{{upload.originalname}}
+					</td>
+					<td data-title="'Mime Type '" sortable="'mimetype'" filter="{ 'mimetype': 'text' }">
+						{{upload.mimetype}}
+					</td>
+					<td data-title="'File Size'" sortable="'size'" filter="{ 'size': 'text' }">
+						{{upload.size}}
+					</td>				
+					<td data-title="'Actions'">							
+						<a ng-href='{{"../"+upload.path + "/" + upload.originalname}}'><button class="btn  btn-success">Download</button></a>
+						
+					</td>
+				</tr>
+			</tbody> 
 		</table> 
 
 	

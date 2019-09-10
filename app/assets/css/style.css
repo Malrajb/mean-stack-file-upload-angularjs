@@ -244,11 +244,12 @@ textarea {
 
 .extra a {
 	color: #666;
+	font-size:16px;
 }
 
 .extra h4 {
 	margin-bottom: 1em;	
-	font-weight: 400;
+	font-weight: 800;
 }
 
 .extra ul {
@@ -429,7 +430,11 @@ textarea {
 	background: #FFF;
 }
 
-
+.recent_uploaded_file{}
+.recent_uploaded_file td {
+	background:yellow !important; 
+	color:red;
+}
 
 
 /*------------------------------------------------------------------
