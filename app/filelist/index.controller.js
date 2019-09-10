@@ -43,6 +43,8 @@
 						
 						$scope.uploadList = new ngTableParams( { page: 1, count: 5}, {
 
+								counts:[5,10,25,50,100],
+								
 								total: $scope.uploadsdata.length,
 
 								getData: function ($defer, params) {
@@ -63,11 +65,11 @@
 			} 
 			getMyFiles();	
 			
-			$scope.download = function(file) {
+			/* $scope.download = function(file) {
 				$http.get('/uploads').then(function(response){										
 					$scope.uploads = response.data;
 				});
-			}
+			} */
 		    $scope.submit = function(){
 				Upload.upload({
 				url: '/api/files/uploadfile',
