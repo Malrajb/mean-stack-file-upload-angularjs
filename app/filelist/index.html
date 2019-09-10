@@ -3,7 +3,7 @@
 	<div class="span12">
   
 		<div class="widget widget-table action-table">
-			<div class="widget-header"> <i class="icon-th-list"></i>
+			<div class="widget-header"> <i class="icon-upload"></i>
 				<h3>Upload File </h3>
 			</div>	
 			<!-- /widget-header -->
@@ -64,17 +64,17 @@
 				<td data-title="'Title'" sortable="'name'" filter="{ 'name': 'text' }">
 					{{upload.name}}
 				</td>
-				<td data-title="'File Name'" sortable="'upload.file.originalname'" filter="{ 'upload.file.originalname': 'text' }">
-					{{upload.file.originalname}}
+				<td data-title="'File Name'" sortable="'originalname'" filter="{ 'originalname': 'text' }">
+					{{upload.originalname}}
 				</td>
-				<td data-title="'Mime Type '" sortable="'upload.file.mimetype'" filter="{ 'upload.file.mimetype': 'text' }">
-					{{upload.file.mimetype}}
+				<td data-title="'Mime Type '" sortable="'mimetype'" filter="{ 'mimetype': 'text' }">
+					{{upload.mimetype}}
 				</td>
-				<td data-title="'File Size'" sortable="'upload.file.size'" filter="{ 'upload.file.size': 'text' }">
-					{{upload.file.size}}
+				<td data-title="'File Size'" sortable="'size'" filter="{ 'size': 'text' }">
+					{{upload.size}}
 				</td>				
 				<td data-title="'View'">							
-					<a ng-href='{{"../"+upload.file.path + "/" + upload.file.originalname}}'><button class="btn  btn-success">Download</button></a>
+					<a ng-href='{{"../"+upload.path + "/" + upload.originalname}}'><button class="btn  btn-success">Download</button></a>
 					
 				</td>
 			</tr>

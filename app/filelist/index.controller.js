@@ -2,8 +2,7 @@
     'use strict';
 
     angular
-        .module('app')
-		//.service('FileUploader', FileUploader)
+        .module('app')		
         .controller('filelist.IndexController', Controller);
 
     function Controller($window, $scope, $http, $filter, Upload, ngTableParams, UserService, FlashService) { 
@@ -24,10 +23,24 @@
 			// Get logged user files
 			function getMyFiles(){
 				$http.get('/api/files/list').then(function(response){								
-					$scope.uploadsdata = response.data.fileList;  				 		   
+					 	 		   
+					$scope.uploadsdata = [];					
+					//convert multidimensional into single dimension
+					var records = response.data.fileList;					 
+					 
+				    angular.forEach(records, function(row){	
+						var fileobj = {}; 					
+						fileobj.name = row.name; 
+						fileobj.originalname = row.file.originalname; 
+						fileobj.mimetype = row.file.mimetype; 
+						fileobj.size = row.file.size;					  
+						fileobj.path = row.file.path;					  
+					    $scope.uploadsdata.push(fileobj);					           
+				    });   	
 					
+					// ng-sorting and filters
 					if (!response.data.error) {		 
-						//dataTable.render($scope, '', "uploadList", response.data.fileList);
+						
 						$scope.uploadList = new ngTableParams( { page: 1, count: 5}, {
 
 								total: $scope.uploadsdata.length,
@@ -44,10 +57,7 @@
 
 								}
 
-						});  
-
-
-						//$scope.usersTable = new ngTableParams({}, { dataset: $scope.uploadsdata });					
+						});  										
 					}				
 				});
 			} 
@@ -66,14 +76,11 @@
 			}).then(function (response) {			 
 				$scope.uploads = {};
 				$scope.uploadList = {};
-				console.log(" DDD scope.uploadList NEW");
+				// callback function for get user file list
 				getMyFiles();			  
 			})
 		    } // submit end
-        }	// initController end
-		
-		
-		
+        }	// initController end	
 		
     }
 
