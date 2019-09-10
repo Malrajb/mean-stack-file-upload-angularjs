@@ -5,7 +5,7 @@
         .module('app')
         .controller('Account.IndexController', Controller);
 
-    function Controller($window, UserService, FlashService) {
+    function Controller($window, $rootScope, UserService, FlashService) {
         var vm = this;
 
         vm.user = null;
@@ -18,6 +18,7 @@
             // get current user
             UserService.GetCurrent().then(function (user) {
                 vm.user = user;
+				$rootScope.logged_user = user;
             });
         }
 

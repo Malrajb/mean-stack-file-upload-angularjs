@@ -5,7 +5,7 @@
         .module('app')		
         .controller('filelist.IndexController', Controller);
 
-    function Controller($window, $scope, $http, $filter, Upload, ngTableParams, UserService, FlashService) { 
+    function Controller($window, $scope, $rootScope, $http, $filter, Upload, ngTableParams, UserService, FlashService) { 
         var vm = this;
 
         vm.user = null;
@@ -18,6 +18,7 @@
             // get current user
             UserService.GetCurrent().then(function (user) {
                 vm.user = user;
+				$rootScope.logged_user = user;
             }); 
 			
 			// Get logged user files

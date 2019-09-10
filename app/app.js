@@ -41,6 +41,7 @@
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $rootScope.activeTab = toState.data.activeTab;
         });
+		$rootScope.logged_user = {};
     }
 
     // manually bootstrap angular after the JWT token is retrieved from the server
