@@ -37,7 +37,9 @@
 				 
 				angular.forEach(records, function(row){	
 					var fileobj = {}; 					
+					fileobj._id = row._id; 
 					fileobj.name = row.name; 
+					fileobj.filename = row.file.filename; 
 					fileobj.originalname = row.file.originalname; 
 					fileobj.mimetype = row.file.mimetype; 
 					fileobj.size = row.file.size;					  
@@ -95,6 +97,22 @@
 		function remove_high_light(){
 			$scope.file_uploaded = 0;
 			$('#uploadListTbl tr').removeClass('recent_uploaded_file');
+		}
+
+		// delete a file
+		$scope.deleteFile = function(_id,filename,row_id){			
+			var confirmed = window.confirm("Are you sure want to delete?");
+			if(confirmed){
+				var data = {_id:_id,filename:filename};
+				$http.post('/api/files/deleteFile',data).then(function(response){
+					if(response.status==200){					 
+						$("#"+row_id).fadeOut('slow');
+						$timeout( function(){alert('File deleted successfully!');}, 1000);	
+					}else{console.log(response);
+						alert('Error happens on deleting the file. Please try again.');	
+					}					
+				});
+			}
 		}	
 		
     }

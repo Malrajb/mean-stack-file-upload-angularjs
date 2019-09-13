@@ -13,7 +13,7 @@ var service = {};
 service.getUserFiles = getUserFiles;
 service.insertFile = insertFile;
 service.update = update;
-service.delete = _delete;
+service.deleteFile = deleteFile;
 
 module.exports = service; 
 
@@ -77,7 +77,7 @@ function update(fileParam) {
     return deferred.promise;
 }
 
-function _delete(_id,userId) { 
+function deleteFile(_id,userId) { 
     var deferred = Q.defer();
 	
 	// remove file with file id & userId 

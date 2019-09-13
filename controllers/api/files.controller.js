@@ -10,6 +10,7 @@ var fileService = require('services/file.service');
 
 // routes
 router.get('/list/', getUserFiles);
+router.post('/deleteFile/', deleteFile);
 				
 router.post('/uploadfile', upload.single('file'), function (req, res, next) {
 
@@ -33,7 +34,6 @@ router.post('/uploadfile', upload.single('file'), function (req, res, next) {
 	}
 });
 //router.post('/update-file', updateFile);
-router.delete('/:_id', deleteFile);
 
 module.exports = router;
  
@@ -49,6 +49,7 @@ function getUserFiles(req, res) {
             res.status(400).send(err);
         });
 } 
+
 /* 
 function updateFile(req, res) {
     var userId = req.user.sub; 
@@ -74,15 +75,38 @@ function updateFile(req, res) {
 function deleteFile(req, res) {
     
 	var userId = req.user.sub;
-	var fileId = req.params._id;
+	var fileId = req.body._id;
+	var filename = req.body.filename;
 	if(userId !='' && fileId !=''){
-    fileService.delete(fileId,userId)
-        .then(function () {
-            res.sendStatus(200);
-        })
-        .catch(function (err) {
-            res.status(400).send(err);
-        });
+		fileService.deleteFile(fileId,userId)
+			.then(function () {
+				
+				/* 
+				//gets your app's root path
+				var root = path.dirname(require.main.filename); 				
+				var filePath = root+"/uploads/"+filename; 
+				*/
+				var filePath = path.resolve("./uploads/"+filename);			 
+				 
+				fs.unlink(filePath, function(error) { 
+				
+					// file doens't exist error
+					if(error && error.code == 'ENOENT') {						
+						console.info("File doesn't exist, won't remove it. Given filePath :", filePath);
+					}
+					// other errors, e.g. maybe we don't have enough permission					
+					else if (error) {						
+						console.log("Error occurred while trying to remove the file. Given filePath :", filePath);
+					} else {
+						console.info("File deleted successfully!");
+					}
+				});
+				
+				res.sendStatus(200);
+			})
+			.catch(function (err) {
+				res.status(400).send(err);
+			});
 	}else{
 		return res.status(400).send('Something missing on delete file');
 	}		
