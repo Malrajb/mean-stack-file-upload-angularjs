@@ -37,3 +37,15 @@
   <!-- /subnavbar-inner --> 
 </div>
 <!-- /subnavbar -->
+
+<!-- flash-message -->
+<div class="row" id="flash-widget" ng-if="flash">
+	<div class="span12">		
+		<div class="widget">
+		<div class="flash-message">
+			<div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>
+		</div>
+	</div>
+ </div>
+ </div>
+ <!-- /flash-message -->

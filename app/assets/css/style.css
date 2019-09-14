@@ -24,6 +24,22 @@ textarea {
   font-family: 'Open Sans';
 }
 
+.flash-message {
+    margin-top: 20px;
+    padding-left: 50px;	
+}
+alert-success {
+    color: #3c763d !important;
+    background-color: #dff0d8 !important;
+    border-color: #d6e9c6 !important;
+}
+.alert {
+    padding: 15px !important;
+    margin-bottom: 20px !important;
+    border: 1px solid transparent !important;
+    border-radius: 4px !important;
+}	
+
 .dropdown .dropdown-menu {
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;

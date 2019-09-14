@@ -81,10 +81,18 @@
 			}).then(function (response) {	
 				
 				// for high lighting first row
-				$scope.file_uploaded = 1;
-				// removing high light using timeout
-				$timeout( function(){ remove_high_light(); }, 3000);
+				$scope.file_uploaded = 1; 
 				
+				//Flash message
+				FlashService.Success('File uploaded successfully!');
+				$timeout( function(){	
+									// removing high light using timeout
+									remove_high_light();
+									$("#flash-widget").fadeOut('slow');  
+						}, 5000);
+						
+				$timeout( function(){	FlashService.clearFlashMessage();}, 7000);
+						
 				$scope.uploads = {};
 				$scope.uploadList = {};
 				
@@ -101,15 +109,17 @@
 
 		// delete a file
 		$scope.deleteFile = function(_id,filename,row_id){			
-			var confirmed = window.confirm("Are you sure want to delete?");
+			var confirmed = $window.confirm("Are you sure want to delete?");
 			if(confirmed){
 				var data = {_id:_id,filename:filename};
 				$http.post('/api/files/deleteFile',data).then(function(response){
 					if(response.status==200){					 
 						$("#"+row_id).fadeOut('slow');
-						$timeout( function(){alert('File deleted successfully!');}, 1000);	
-					}else{console.log(response);
-						alert('Error happens on deleting the file. Please try again.');	
+						FlashService.Success('File deleted successfully!');
+						$timeout( function(){	$("#flash-widget").fadeOut('slow');  }, 5000);	
+						$timeout( function(){	FlashService.clearFlashMessage();}, 7000);	
+					}else{
+						FlashService.Error('Error happens on deleting the file. Please try again.');	
 					}					
 				});
 			}
