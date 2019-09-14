@@ -38,7 +38,7 @@
 				angular.forEach(records, function(row){	
 					var fileobj = {}; 					
 					fileobj._id = row._id; 
-					fileobj.name = row.name; 
+					fileobj.title = row.title; 
 					fileobj.filename = row.file.filename; 
 					fileobj.originalname = row.file.originalname; 
 					fileobj.mimetype = row.file.mimetype; 
@@ -73,7 +73,73 @@
 			});
 		}
 		
+		// aother sample image file validation
+		/*
+		$(document).ready(function() {
+		  var _URL = window.URL || window.webkitURL;
+		  var maxFieSize = 1024*1024*2; // 2MB
+			$('#file-0').bind('change', function() {
+			var file = this.files[0], img;
+			if (Math.round(file.size) > maxFieSize) { // make it in MB so divide by 1024*1024
+			   alert('Please select image size less than 2 MB');
+			   $('#file-0').val('');
+			   return false;
+			}
+			if (file) {
+			  img = new Image();
+			  img.onload = function() {
+				$('.submit-btn').prop('disabled', false);
+				$(".error_line").fadeOut();
+				
+			  };
+			  img.onerror = function() {
+				$('.submit-btn').prop('disabled', true);
+				$(".error_line").fadeIn();
+			  };
+			  img.src = _URL.createObjectURL(file);
+			}
+		  });
+		});
+		*/
+		
+		// Best for user defined file format validation
+		$(document).ready(function() {
+			var maxFieSize = 1024*1024*2; // 2MB
+			$('#file-0').bind('change', function() {
+				var filename = this.files[0].name;				
+				var extn = filename.split(".").pop().toLowerCase();			
+				
+				//file type validation
+				var validFormats = ['jpg','jpeg','gif','png','txt','doc','docx','pdf','xls','xlsx','zip'];
+				if(validFormats.indexOf(extn) == -1){
+					alert('Please select a valid file. Allowed types are : '+validFormats.join(', '));
+					$('#file-0').val('');
+					return false;
+				} 	
+				
+				//file size validation
+				var filesize=(this.files[0].size);				
+				if(filesize > maxFieSize ) { //
+					alert('Large file. Please select file less than or equal to 2 MB');
+					$('#file-0').val('');
+					return false;
+				};
+			}); 
+		});
+		
 		$scope.uploadFile = function(){
+			var title = $.trim($('#title').val());
+			var filename = $.trim($('#file-0').val());
+			if(title =='' || title ==""){
+				alert('Please enter a title');
+				return false;
+			}		
+			if(filename =='' || filename ==""){
+				alert('Please select a file');
+				return false;
+			} 
+			
+			//	file upload process		
 			Upload.upload({
 				url: '/api/files/uploadfile',
 				method: 'post',
@@ -98,14 +164,14 @@
 				
 				// callback function for get user file list
 				getMyFiles();			  
-			})
-		} // uploadFile end
+			});			
+		}	 
 			
 		// remove high light for recent uploaded record			
 		function remove_high_light(){
 			$scope.file_uploaded = 0;
 			$('#uploadListTbl tr').removeClass('recent_uploaded_file');
-		}
+		}		
 
 		// delete a file
 		$scope.deleteFile = function(_id,filename,row_id){			

@@ -12,18 +12,19 @@
 			<div class="widget-content">				
 				
 				   <div class="row" style="padding-left:10px; margin-top:10px;">
-					<form ng-submit="uploadFile()" method="post" >
+					<form ng-submit="uploadFile()" method="post" name="fileUploadFrm" >
 						<fieldset>
 							<div class="span3">
 								<div class="form-group">
-									<label for="name">File Title</label>
-									<input type="text" name="name" id="name" ng-model="upload.name" autocomplete="off" required/>
+									<label for="title">File Title</label>
+									<input type="text" name="title" id="title" ng-model="upload.title" autocomplete="off" required/>
 								</div>
 							</div>
 							<div class="span3">
 								<div class="form-group">
 									<label for="file">Upload file</label>
-									<input type="file" name="file" id="file" ng-model="upload.file" ngf-select ngf-max-size="25MB" required/>
+									<input type="file" name="file-1" id="file-0" ng-model="upload.file" ngf-select ngf-max-size="2MB" required/>
+									<br/><span>Allowed file types : jpg, jpeg, gif, png, txt, doc, docx, pdf, xls, xlsx, zip</span>
 								</div>
 							</div>
 							<div class="span5">
@@ -62,8 +63,8 @@
 		<table ng-table="uploadList" show-filter="true" class="table table-striped table-bordered" id="uploadListTbl">
 			<tbody ng-repeat="upload in uploads">
 				<tr id="row-{{$index}}" ng-class="{recent_uploaded_file:  ($index == 0 && file_uploaded == 1) }" >
-					<td data-title="'Title'" sortable="'name'" filter="{ 'name': 'text' }">
-						{{upload.name}}
+					<td data-title="'Title'" sortable="'title'" filter="{ 'title': 'text' }">
+						{{upload.title}}
 					</td>
 					<td data-title="'File Name'" sortable="'originalname'" filter="{ 'originalname': 'text' }">
 						{{upload.originalname}}

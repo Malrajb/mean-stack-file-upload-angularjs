@@ -17,7 +17,7 @@ router.post('/uploadfile', upload.single('file'), function (req, res, next) {
     var userId = req.user.sub; 
 	var fileParam = {};		
 
-	fileParam.name = req.body.name;      
+	fileParam.title = req.body.title;      
     fileParam.file = req.file;
 		 
 	if (fileParam.title != '') {
