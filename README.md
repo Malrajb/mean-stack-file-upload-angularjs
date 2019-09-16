@@ -30,6 +30,8 @@ git clone https://github.com/Malrajb/mean-stack-file-upload-angularjs
 
  . Download file 
  
+ . Delete file 
+ 
  # Addtional informations:  
  "allow cross origin requests" implemented in server side (node js) using following script in main file of the node server
  
