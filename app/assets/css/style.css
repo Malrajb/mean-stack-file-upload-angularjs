@@ -25,8 +25,7 @@ textarea {
 }
 
 .flash-message {
-    margin-top: 20px;
-    padding-left: 50px;	
+     /* will use later */
 }
 alert-success {
     color: #3c763d !important;

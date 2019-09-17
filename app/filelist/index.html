@@ -1,5 +1,13 @@
-﻿<!--  File upload starts -->
-<div class="row">
+﻿<!-- flash-message -->
+<div class="row" id="flash-widget" ng-if="flash">
+	<div class="span12">					
+		<div class="{{'alert alert-' + flash.type}}" ng-bind="flash.message"></div>						
+	</div>
+ </div>
+ <!-- /flash-message -->
+ 
+<!--  File upload starts -->
+<div class="row" id="main-container">
 	<div class="span12">
   
 		<div class="widget widget-table action-table">
@@ -24,13 +32,13 @@
 								<div class="form-group">
 									<label for="file">Upload file</label>
 									<input type="file" name="file-1" id="file-0" ng-model="upload.file" ngf-select ngf-max-size="2MB" required/>
-									<br/><span>Allowed file types : jpg, jpeg, gif, png, txt, doc, docx, pdf, xls, xlsx, zip</span>
+									<br/><span><b>Allowed file types :</b> jpg, jpeg, gif, png, txt, doc, docx, pdf, xls, xlsx, zip </span>
 								</div>
 							</div>
 							<div class="span5">
 								<div class="form-group">
 									<label for="submit">&nbsp;</label>
-									<input type="submit" value="Submit"/>
+									<input type="submit" value="Submit" class="btn  btn-success"/>
 								</div>
 							</div>
 						</fieldset>
