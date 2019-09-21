@@ -10,9 +10,10 @@
 
         vm.user = null;
 		vm.totalFilesCount = 0;		
-		$scope.uploads = {};        
-		$scope.uploadList = {};        
-		$scope.file_uploaded = 0;        
+		$scope.data = [];      
+		$scope.uploadsdata = [];		
+		$scope.tableParams = {};        
+		$scope.uploaded_file_id = 0;        
         initController();
 		
         function initController() {
@@ -29,11 +30,12 @@
 		
 		// Get logged user files
 		function getMyFiles(){
-			FileService.getMyFiles().then(function (response) {								
-				
-				$scope.uploadsdata = [];   
+			FileService.getMyFiles().then(function (response) {				   
 				 
 				if (!response.error) {
+					
+					$scope.data = [];
+					$scope.uploadsdata = [];
 					 					
 					//convert multidimensional into single dimension
 					var records = response.fileList;					 
@@ -50,16 +52,17 @@
 						$scope.uploadsdata.push(fileobj);					           
 					});   						
 				 
+					
 					// ng-sorting and filters
-					$scope.uploadList = new ngTableParams( { page: 1, count: 5}, {
+					$scope.tableParams = new ngTableParams( { page: 1, count: $scope.uploadsdata.length,sorting:{createdAt:'desc'}}, {
 
-						counts:[5,10,25,50,100],					
+						counts:[5,10,20,50,100],					
 						total: $scope.uploadsdata.length,
-						getData: function ($defer, params) {
-							$scope.uploads = params.sorting() ? $filter('orderBy')($scope.uploadsdata, params.orderBy()) : $scope.uploadsdata;
-							$scope.uploads = params.filter() ? $filter('filter')($scope.uploads, params.filter()) : $scope.uploads;
-							$scope.uploads = $scope.uploads.slice((params.page() - 1) * params.count(), params.page() * params.count());
-							$defer.resolve($scope.uploads);
+						getData: function ($defer, params) {							
+							$scope.uploadsdata = params.sorting() ? $filter('orderBy')($scope.uploadsdata, params.orderBy()) : $scope.uploadsdata;
+							$scope.uploadsdata = params.filter() ? $filter('filter')($scope.uploadsdata, params.filter()) : $scope.uploadsdata;
+							$scope.data = $scope.uploadsdata.slice((params.page() - 1) * params.count(), params.page() * params.count());
+							$defer.resolve($scope.data);
 						}
 					});	
 				}				
@@ -112,7 +115,7 @@
 				
 				//file size validation
 				var filesize=(this.files[0].size);				
-				if(filesize > maxFieSize ) { //
+				if(filesize > maxFieSize ) { 
 					alert('Large file. Please select file less than or equal to 2 MB');
 					$('#file-0').val('');
 					return false;
@@ -141,30 +144,27 @@
 			
 			FileService.uploadFile(Upload,data).then(function (response) {
 				
-				// for high lighting first row
-				$scope.file_uploaded = 1; 
+				// for high lighting uploaded file record
+				$scope.uploaded_file_id = response.fileData.insertedIds[0]; 
 				
 				//Flash message
 				FlashService.Success('File uploaded successfully!');
-				$timeout( function(){	
-									// removing high light using timeout
-									remove_high_light();
-									$("#flash-widget").fadeOut('slow');  
-						}, 5000);
-						
-				$timeout( function(){	FlashService.clearFlashMessage();}, 7000);
-						
-				$scope.uploads = {};
-				$scope.uploadList = {};
 				
 				// callback function for get user file list
-				getMyFiles();			  
+				getMyFiles();
+				
+				$timeout( function(){									
+									// removing high light using timeout
+									remove_high_light();
+									$("#flash-widget").fadeOut('slow'); 
+									FlashService.clearFlashMessage();											
+						}, 3000);
 			});			
 		}	 
 			
 		// remove high light for recent uploaded record			
 		function remove_high_light(){
-			$scope.file_uploaded = 0;
+			$scope.uploaded_file_id = 0;
 			$('#uploadListTbl tr').removeClass('recent_uploaded_file');
 		}		
 
@@ -177,11 +177,15 @@
 				FileService.deleteFile(data).then(function (response) {
 					if(response=='OK'){						 
 						$("#"+row_id).fadeOut('slow');
-						FlashService.Success('File deleted successfully!');
-						// callback function for reload ng-table
-						getMyFiles();
-						$timeout( function(){	$("#flash-widget").fadeOut('slow');  }, 5000);	
-						$timeout( function(){	FlashService.clearFlashMessage();}, 7000);	
+						FlashService.Success('File deleted successfully!');						
+						 
+						$timeout( function(){	
+							// callback function for get user file list
+							getMyFiles();
+							$("#flash-widget").fadeOut('slow'); 
+							FlashService.clearFlashMessage(); 														
+						}, 3000);	
+							
 					}else{
 						FlashService.Error('Error happens on deleting the file. Please try again.');	
 					}					

@@ -23,8 +23,8 @@ router.post('/uploadfile', upload.single('file'), function (req, res, next) {
 	if (fileParam.title != '') {
 		
 		fileService.insertFile(userId,fileParam)
-			.then(function () {
-				res.sendStatus(200);
+			.then(function (fileData) {
+				res.send({'status':200,'fileData':fileData});
 			})
 			.catch(function (err) {
 				res.status(400).send(err);
@@ -43,7 +43,7 @@ function getUserFiles(req, res) {
     
 	fileService.getUserFiles(userId)
         .then(function (fileList) {
-            res.send({'status':1,'fileList':fileList});
+            res.send({'status':200,'fileList':fileList});
         })
         .catch(function (err) {
             res.status(400).send(err);
