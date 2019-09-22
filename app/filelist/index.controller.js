@@ -27,6 +27,9 @@
 			
         }	// initController end	
 		
+		function toggleOverlay(){
+			$('#spinner, #overlay').toggle();
+		}
 		
 		// Get logged user files
 		function getMyFiles(){
@@ -135,6 +138,9 @@
 				return false;
 			} 
 			
+			// show overlay 
+			toggleOverlay();
+			
 			//	file upload process	
 			var data = {
 				url: '/api/files/uploadfile',
@@ -157,7 +163,9 @@
 									// removing high light using timeout
 									remove_high_light();
 									$("#flash-widget").fadeOut('slow'); 
-									FlashService.clearFlashMessage();											
+									FlashService.clearFlashMessage();
+									// hide overlay
+									toggleOverlay();									
 						}, 3000);
 			});			
 		}	 
@@ -172,6 +180,10 @@
 		$scope.deleteFile = function(_id,filename,row_id){			
 			var confirmed = $window.confirm("Are you sure want to delete this record?");
 			if(confirmed){
+				
+				// show overlay
+				toggleOverlay();
+				
 				var data = {_id:_id,filename:filename};
 				
 				FileService.deleteFile(data).then(function (response) {
@@ -183,7 +195,9 @@
 							// callback function for get user file list
 							getMyFiles();
 							$("#flash-widget").fadeOut('slow'); 
-							FlashService.clearFlashMessage(); 														
+							FlashService.clearFlashMessage(); 
+							// hide overlay 
+							toggleOverlay();							
 						}, 3000);	
 							
 					}else{
