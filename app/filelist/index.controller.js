@@ -57,7 +57,7 @@
 				 
 					
 					// ng-sorting and filters
-					$scope.tableParams = new ngTableParams( { page: 1, count: $scope.uploadsdata.length,sorting:{createdAt:'desc'}}, {
+					$scope.tableParams = new ngTableParams( { page: 1, count: 5,sorting:{createdAt:'desc'}}, {
 
 						counts:[5,10,20,50,100],					
 						total: $scope.uploadsdata.length,
@@ -155,6 +155,9 @@
 				
 				//Flash message
 				FlashService.Success('File uploaded successfully!');
+				
+				//Dynamically sets count value for resolving pagination issue 
+				$scope.tableParams.count(6);
 				
 				// callback function for get user file list
 				getMyFiles();
