@@ -195,6 +195,8 @@
 						FlashService.Success('File deleted successfully!');						
 						 
 						$timeout( function(){	
+							//Dynamically sets count value for resolving pagination issue 
+							$scope.tableParams.count(6);
 							// callback function for get user file list
 							getMyFiles();
 							$("#flash-widget").fadeOut('slow'); 
