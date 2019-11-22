@@ -31,7 +31,7 @@
   "author": "Malraj B",
   "license": "MIT",
   "dependencies": {
-    "angular": "^1.4.8",
+    "angular": ">=1.7.9",
     "angular-messages": "^1.4.8",
     "bcryptjs": "^2.1.0",
     "body-parser": "^1.14.2",
